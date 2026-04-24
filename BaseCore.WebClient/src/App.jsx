@@ -1,0 +1,146 @@
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import React from 'react';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { CartProvider } from './contexts/CartContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import MainLayout from './components/MainLayout';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import Products from './pages/Products';
+import Users from './pages/Users';
+import Categories from './pages/Categories';
+import Shop from './pages/Shop';
+import MyOrders from './pages/MyOrders';
+import Manufacturers from './pages/Manufacturers';
+import Bills from './pages/Bills';
+
+// Wrapper to redirect authenticated users away from login
+const PublicRoute = ({ children }) => {
+    const { isAuthenticated, loading } = useAuth();
+
+    if (loading) {
+        return (
+            <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+                <div className="spinner-border text-primary" role="status">
+                    <span className="sr-only">Đang tải...</span>
+                </div>
+            </div>
+        );
+    }
+
+    if (isAuthenticated) {
+        return <Navigate to="/" replace />;
+    }
+
+    return children;
+};
+
+function AppRoutes() {
+    return (
+        <Routes>
+            <Route
+                path="/login"
+                element={
+                    <PublicRoute>
+                        <Login />
+                    </PublicRoute>
+                }
+            />
+            <Route
+                path="/shop"
+                element={
+                    <ProtectedRoute>
+                        <MainLayout>
+                            <Shop />
+                        </MainLayout>
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/my-orders"
+                element={
+                    <ProtectedRoute>
+                        <MainLayout>
+                            <MyOrders />
+                        </MainLayout>
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/"
+                element={
+                    <ProtectedRoute>
+                        <MainLayout>
+                            <Dashboard />
+                        </MainLayout>
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/products"
+                element={
+                    <ProtectedRoute>
+                        <MainLayout>
+                            <Products />
+                        </MainLayout>
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/categories"
+                element={
+                    <ProtectedRoute>
+                        <MainLayout>
+                            <Categories />
+                        </MainLayout>
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/manufacturers"
+                element={
+                    <ProtectedRoute adminOnly={true}>
+                        <MainLayout>
+                            <Manufacturers />
+                        </MainLayout>
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/bills"
+                element={
+                    <ProtectedRoute adminOnly={true}>
+                        <MainLayout>
+                            <Bills />
+                        </MainLayout>
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/users"
+                element={
+                    <ProtectedRoute adminOnly={true}>
+                        <MainLayout>
+                            <Users />
+                        </MainLayout>
+                    </ProtectedRoute>
+                }
+            />
+            <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+    );
+}
+
+function App() {
+    return (
+        <Router>
+            <AuthProvider>
+                <CartProvider>
+                    <AppRoutes />
+                </CartProvider>
+            </AuthProvider>
+        </Router>
+    );
+}
+
+export default App;

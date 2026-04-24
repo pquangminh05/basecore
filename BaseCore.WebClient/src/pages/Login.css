@@ -1,0 +1,98 @@
+.watch-login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background:
+        radial-gradient(circle at top right, rgba(199, 173, 110, 0.25), transparent 40%),
+        linear-gradient(145deg, #0f172a 0%, #111827 60%, #0b1222 100%);
+}
+
+.watch-login-card {
+    width: 980px;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(8, 15, 30, 0.35);
+}
+
+.watch-login-brand {
+    padding: 44px 40px;
+    color: #ecf1ff;
+    background:
+        linear-gradient(170deg, rgba(199, 173, 110, 0.18), rgba(199, 173, 110, 0) 50%),
+        linear-gradient(145deg, #111827, #0f172a);
+}
+
+.watch-login-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 12px;
+    letter-spacing: 1.1px;
+    border-radius: 999px;
+    background: rgba(199, 173, 110, 0.2);
+    border: 1px solid rgba(199, 173, 110, 0.35);
+    margin-bottom: 16px;
+}
+
+.watch-login-brand h1 {
+    font-size: 36px;
+    margin: 0 0 10px;
+    font-weight: 700;
+}
+
+.watch-login-brand p {
+    max-width: 360px;
+    margin: 0;
+    color: rgba(236, 241, 255, 0.8);
+}
+
+.watch-login-form-wrap {
+    padding: 40px 34px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.watch-login-header h2 {
+    margin: 0 0 4px;
+    font-size: 28px;
+    color: #0f172a;
+}
+
+.watch-login-header small {
+    color: #6b7280;
+}
+
+.watch-login-form {
+    margin-top: 20px;
+}
+
+.watch-login-submit {
+    margin-top: 8px;
+    height: 42px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+@media (max-width: 900px) {
+    .watch-login-card {
+        grid-template-columns: 1fr;
+    }
+
+    .watch-login-brand {
+        padding: 24px;
+    }
+
+    .watch-login-brand h1 {
+        font-size: 28px;
+    }
+
+    .watch-login-form-wrap {
+        padding: 24px;
+    }
+}
