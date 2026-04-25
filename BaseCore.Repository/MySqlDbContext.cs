@@ -126,7 +126,7 @@ namespace BaseCore.Repository
 
                 // Relationships
                 entity.HasOne(e => e.Order)
-                      .WithMany()
+                      .WithMany(o => o.OrderDetails)
                       .HasForeignKey(e => e.OrderId)
                       .OnDelete(DeleteBehavior.Cascade);
 

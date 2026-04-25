@@ -1,5 +1,3 @@
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 
@@ -7,10 +5,8 @@ namespace BaseCore.Entities
 {
     public class Order
     {
-        [BsonId]
         public int Id { get; set; }
 
-        [BsonRepresentation(BsonType.String)]
         public Guid UserId { get; set; }
 
         public DateTime OrderDate { get; set; } = DateTime.UtcNow;
@@ -21,6 +17,6 @@ namespace BaseCore.Entities
 
         public string ShippingAddress { get; set; }
 
-        public List<OrderDetail> OrderDetails { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; } = new();
     }
 }

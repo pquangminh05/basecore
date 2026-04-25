@@ -1,9 +1,28 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 
 const CartContext = createContext();
+const CART_STORAGE_KEY = 'shopping_cart';
 
 export const CartProvider = ({ children }) => {
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems, setCartItems] = useState(() => {
+        // Load cart from localStorage on initialization
+        try {
+            const saved = localStorage.getItem(CART_STORAGE_KEY);
+            return saved ? JSON.parse(saved) : [];
+        } catch (error) {
+            console.error('Error loading cart from localStorage:', error);
+            return [];
+        }
+    });
+
+    // Persist cart to localStorage whenever it changes
+    useEffect(() => {
+        try {
+            localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
+        } catch (error) {
+            console.error('Error saving cart to localStorage:', error);
+        }
+    }, [cartItems]);
 
     const addToCart = useCallback((product, quantity) => {
         setCartItems((prevItems) => {

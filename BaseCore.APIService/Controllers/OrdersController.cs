@@ -77,54 +77,85 @@ namespace BaseCore.APIService.Controllers
             if (string.IsNullOrEmpty(userId) || !Guid.TryParse(userId, out var userGuid))
                 return Unauthorized();
 
-            // Validate products and calculate total
-            decimal totalAmount = 0;
-            var orderDetails = new List<OrderDetail>();
-
-            foreach (var item in dto.Items)
+            try
             {
-                var product = await _productRepository.GetByIdAsync(item.ProductId);
-                if (product == null)
-                    return BadRequest(new { message = $"Product {item.ProductId} not found" });
+                // Validate products and calculate total
+                decimal totalAmount = 0;
+                var orderDetails = new List<OrderDetail>();
 
-                if (product.Stock < item.Quantity)
-                    return BadRequest(new { message = $"Insufficient stock for {product.Name}" });
-
-                totalAmount += product.Price * item.Quantity;
-                orderDetails.Add(new OrderDetail
+                foreach (var item in dto.Items)
                 {
-                    ProductId = item.ProductId,
-                    Quantity = item.Quantity,
-                    UnitPrice = product.Price
-                });
-            }
+                    var product = await _productRepository.GetByIdAsync(item.ProductId);
+                    if (product == null)
+                        return BadRequest(new { message = $"Product {item.ProductId} not found" });
 
-            var order = new Order
-            {
-                UserId = userGuid,
-                OrderDate = DateTime.Now,
-                TotalAmount = totalAmount,
-                Status = "Pending",
-                ShippingAddress = dto.ShippingAddress ?? ""
-            };
+                    if (product.Stock < item.Quantity)
+                        return BadRequest(new { message = $"Insufficient stock for {product.Name}" });
 
-            await _orderRepository.AddAsync(order);
+                    totalAmount += product.Price * item.Quantity;
+                    orderDetails.Add(new OrderDetail
+                    {
+                        ProductId = item.ProductId,
+                        Quantity = item.Quantity,
+                        UnitPrice = product.Price
+                    });
+                }
 
-            // Lưu chi tiết & trừ stock SAU KHI order đã được tạo thành công
-            foreach (var detail in orderDetails)
-            {
-                detail.OrderId = order.Id;
-                await _orderDetailRepository.AddAsync(detail);
-
-                var product = await _productRepository.GetByIdAsync(detail.ProductId);
-                if (product != null)
+                var order = new Order
                 {
-                    product.Stock -= detail.Quantity;
-                    await _productRepository.UpdateAsync(product);
+                    UserId = userGuid,
+                    OrderDate = DateTime.Now,
+                    TotalAmount = totalAmount,
+                    Status = "Pending",
+                    ShippingAddress = dto.ShippingAddress ?? ""
+                };
+
+                await _orderRepository.AddAsync(order);
+
+                try
+                {
+                    // Lưu chi tiết & trừ stock SAU KHI order đã được tạo thành công
+                    foreach (var detail in orderDetails)
+                    {
+                        detail.OrderId = order.Id;
+                        Console.WriteLine($"Adding order detail: OrderId={order.Id}, ProductId={detail.ProductId}, Qty={detail.Quantity}");
+                        await _orderDetailRepository.AddAsync(detail);
+
+                        var product = await _productRepository.GetByIdAsync(detail.ProductId);
+                        if (product != null)
+                        {
+                            Console.WriteLine($"Updating product stock: ProductId={product.Id}, OldStock={product.Stock}, Qty={detail.Quantity}");
+                            product.Stock -= detail.Quantity;
+                            await _productRepository.UpdateAsync(product);
+                        }
+                    }
+
+                    return Ok(new { message = "Order created successfully", order, details = orderDetails });
+                }
+                catch (Exception detailEx)
+                {
+                    // Nếu lỗi khi tạo details hoặc update stock, xóa order đi
+                    Console.Error.WriteLine($"Order detail creation error: {detailEx.Message}");
+                    Console.Error.WriteLine($"Stack trace: {detailEx.StackTrace}");
+                    try
+                    {
+                        Console.WriteLine($"Rollback: Deleting order {order.Id}");
+                        await _orderRepository.DeleteByIdAsync(order.Id);
+                    }
+                    catch (Exception deleteEx)
+                    {
+                        Console.Error.WriteLine($"Failed to rollback order: {deleteEx.Message}");
+                        Console.Error.WriteLine($"Stack trace: {deleteEx.StackTrace}");
+                    }
+                    return StatusCode(500, new { message = "Error creating order details", error = detailEx.Message });
                 }
             }
-
-            return Ok(new { message = "Order created successfully", order, details = orderDetails });
+            catch (Exception ex)
+            {
+                // Log error and return detailed error message
+                Console.Error.WriteLine($"Order creation error: {ex.Message}");
+                return StatusCode(500, new { message = "Error creating order", error = ex.Message });
+            }
         }
 
         /// <summary>
