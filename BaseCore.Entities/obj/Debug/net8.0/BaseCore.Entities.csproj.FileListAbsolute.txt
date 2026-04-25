@@ -100,3 +100,4 @@ C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.Entities
 C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.Entities\obj\Debug\net8.0\refint\BaseCore.Entities.dll
 C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.Entities\obj\Debug\net8.0\BaseCore.Entities.pdb
 C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.Entities\obj\Debug\net8.0\ref\BaseCore.Entities.dll
+C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.Entities\obj\Debug\net8.0\BaseCore.Entities.sourcelink.json

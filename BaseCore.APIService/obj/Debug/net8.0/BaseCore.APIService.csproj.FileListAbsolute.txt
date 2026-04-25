@@ -959,3 +959,4 @@ C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.APIServi
 C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.APIService\obj\Debug\net8.0\BaseCore.APIService.pdb
 C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.APIService\obj\Debug\net8.0\BaseCore.APIService.genruntimeconfig.cache
 C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.APIService\obj\Debug\net8.0\ref\BaseCore.APIService.dll
+C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.APIService\obj\Debug\net8.0\BaseCore.APIService.sourcelink.json

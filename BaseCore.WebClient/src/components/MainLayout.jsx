@@ -67,84 +67,82 @@ const MainLayout = ({ children }) => {
 
                     <nav className="mt-2">
                         <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
-                            {/* USER MENU - cho tất cả user */}
+
+                            {/* Bảng điều khiển - tất cả */}
                             <li className="nav-item">
                                 <Link to="/" className={`nav-link ${isActive('/')}`}>
                                     <i className="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>1. Bảng điều khiển</p>
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to="/shop" className={`nav-link ${isActive('/shop')}`}>
-                                    <i className="nav-icon fas fa-shopping-cart"></i>
-                                    <p>2. 🛍️ Cửa hàng</p>
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to="/my-orders" className={`nav-link ${isActive('/my-orders')}`}>
-                                    <i className="nav-icon fas fa-list"></i>
-                                    <p>3. 📋 Đơn hàng của tôi</p>
+                                    <p>Bảng điều khiển</p>
                                 </Link>
                             </li>
 
-                            {/* ADMIN MENU - chỉ cho admin */}
-                            {isAdmin() && (
+                            {/* Cửa hàng & Đơn hàng - chỉ user thường */}
+                            {!isAdmin() && (
                                 <>
                                     <li className="nav-item">
-                                        <a href="#" className="nav-link" data-toggle="collapse">
-                                            <i className="nav-icon fas fa-cogs"></i>
-                                            <p>
-                                                4. ⚙️ Quản lý
-                                                <i className="right fas fa-angle-left"></i>
-                                            </p>
-                                        </a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/products" className={`nav-link ${isActive('/products')}`}>
-                                            <i className="nav-icon fas fa-box"></i>
-                                            <p>&nbsp;&nbsp;4.1 Sản phẩm</p>
+                                        <Link to="/shop" className={`nav-link ${isActive('/shop')}`}>
+                                            <i className="nav-icon fas fa-shopping-cart"></i>
+                                            <p>🛍️ Cửa hàng</p>
                                         </Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link to="/categories" className={`nav-link ${isActive('/categories')}`}>
-                                            <i className="nav-icon fas fa-tags"></i>
-                                            <p>&nbsp;&nbsp;4.2 Danh mục</p>
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/manufacturers" className={`nav-link ${isActive('/manufacturers')}`}>
-                                            <i className="nav-icon fas fa-industry"></i>
-                                            <p>&nbsp;&nbsp;4.3 Thương hiệu</p>
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/bills" className={`nav-link ${isActive('/bills')}`}>
-                                            <i className="nav-icon fas fa-file-invoice"></i>
-                                            <p>&nbsp;&nbsp;4.4 Hóa đơn / Đơn hàng</p>
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/users" className={`nav-link ${isActive('/users')}`}>
-                                            <i className="nav-icon fas fa-users"></i>
-                                            <p>&nbsp;&nbsp;4.5 Người dùng</p>
+                                        <Link to="/my-orders" className={`nav-link ${isActive('/my-orders')}`}>
+                                            <i className="nav-icon fas fa-list"></i>
+                                            <p>📋 Đơn hàng của tôi</p>
                                         </Link>
                                     </li>
                                 </>
                             )}
 
-                            {/* NON-ADMIN MENU - chỉ cho user thường */}
-                            {!isAdmin() && (
+                            {/* Menu Admin */}
+                            {isAdmin() && (
                                 <>
                                     <li className="nav-item">
                                         <Link to="/products" className={`nav-link ${isActive('/products')}`}>
                                             <i className="nav-icon fas fa-box"></i>
-                                            <p>4. Sản phẩm</p>
+                                            <p>Sản phẩm</p>
                                         </Link>
                                     </li>
                                     <li className="nav-item">
                                         <Link to="/categories" className={`nav-link ${isActive('/categories')}`}>
                                             <i className="nav-icon fas fa-tags"></i>
-                                            <p>5. Danh mục</p>
+                                            <p>Danh mục</p>
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="/manufacturers" className={`nav-link ${isActive('/manufacturers')}`}>
+                                            <i className="nav-icon fas fa-industry"></i>
+                                            <p>Thương hiệu</p>
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="/bills" className={`nav-link ${isActive('/bills')}`}>
+                                            <i className="nav-icon fas fa-file-invoice"></i>
+                                            <p>Hóa đơn / Đơn hàng</p>
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="/users" className={`nav-link ${isActive('/users')}`}>
+                                            <i className="nav-icon fas fa-users"></i>
+                                            <p>Người dùng</p>
+                                        </Link>
+                                    </li>
+                                </>
+                            )}
+
+                            {/* Menu user thường - sản phẩm & danh mục */}
+                            {!isAdmin() && (
+                                <>
+                                    <li className="nav-item">
+                                        <Link to="/products" className={`nav-link ${isActive('/products')}`}>
+                                            <i className="nav-icon fas fa-box"></i>
+                                            <p>Sản phẩm</p>
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="/categories" className={`nav-link ${isActive('/categories')}`}>
+                                            <i className="nav-icon fas fa-tags"></i>
+                                            <p>Danh mục</p>
                                         </Link>
                                     </li>
                                 </>

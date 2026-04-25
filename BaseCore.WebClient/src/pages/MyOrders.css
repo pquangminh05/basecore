@@ -1,14 +1,12 @@
 .my-orders-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+    /* Removed - now using AdminLTE content-wrapper */
 }
 
 .orders-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .orders-header h1 {

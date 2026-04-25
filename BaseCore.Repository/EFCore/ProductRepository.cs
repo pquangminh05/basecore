@@ -104,7 +104,7 @@ namespace BaseCore.Repository.EFCore
             var totalCount = await query.CountAsync();
 
             var products = await query
-                .OrderByDescending(p => p.Id)
+                .OrderBy(p => p.Id)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();

@@ -1027,3 +1027,4 @@ C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.AuthServ
 C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.AuthService\obj\Debug\net8.0\BaseCore.AuthService.pdb
 C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.AuthService\obj\Debug\net8.0\BaseCore.AuthService.genruntimeconfig.cache
 C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.AuthService\obj\Debug\net8.0\ref\BaseCore.AuthService.dll
+C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.AuthService\obj\Debug\net8.0\BaseCore.AuthService.sourcelink.json

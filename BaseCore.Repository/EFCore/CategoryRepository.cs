@@ -37,7 +37,7 @@ namespace BaseCore.Repository.EFCore
 
             var totalCount = await query.CountAsync();
             var categories = await query
-                .OrderByDescending(c => c.Id)
+                .OrderBy(c => c.Id)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();

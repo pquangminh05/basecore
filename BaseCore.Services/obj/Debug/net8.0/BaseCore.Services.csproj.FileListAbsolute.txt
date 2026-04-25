@@ -136,3 +136,4 @@ C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.Services
 C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.Services\obj\Debug\net8.0\refint\BaseCore.Services.dll
 C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.Services\obj\Debug\net8.0\BaseCore.Services.pdb
 C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.Services\obj\Debug\net8.0\ref\BaseCore.Services.dll
+C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.Services\obj\Debug\net8.0\BaseCore.Services.sourcelink.json

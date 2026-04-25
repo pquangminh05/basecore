@@ -102,25 +102,31 @@ const Shop = () => {
     };
 
     return (
-        <div className="container py-4">
-            <div className="d-flex justify-content-between align-items-center mb-3">
-                <h2 className="mb-0">🛍️ Cửa Hàng Sản Phẩm</h2>
-                <div className="d-flex gap-2">
-                    <button 
-                        onClick={() => setCartOpen(true)}
-                        className="btn btn-success position-relative"
-                    >
-                        🛒 Giỏ hàng
-                        {getTotalItems() > 0 && (
-                            <span className="badge bg-danger position-absolute top-0 end-0 translate-middle">
-                                {getTotalItems()}
-                            </span>
-                        )}
-                    </button>
-                    <a href="/my-orders" className="btn btn-info">📋 Đơn hàng của tôi</a>
-                    <a href="/dashboard" className="btn btn-outline-secondary">⚙️ Quản trị</a>
+        <div className="content-wrapper">
+            <div className="content-header">
+                <div className="container-fluid">
+                    <div className="d-flex justify-content-between align-items-center">
+                        <h1 className="m-0">🛍️ Cửa Hàng Sản Phẩm</h1>
+                        <div className="d-flex gap-2">
+                            <button
+                                onClick={() => setCartOpen(true)}
+                                className="btn btn-success position-relative"
+                            >
+                                🛒 Giỏ hàng
+                                {getTotalItems() > 0 && (
+                                    <span className="badge badge-danger ml-1">
+                                        {getTotalItems()}
+                                    </span>
+                                )}
+                            </button>
+                            <a href="/my-orders" className="btn btn-info">📋 Đơn hàng của tôi</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <section className="content">
+                <div className="container-fluid">
 
             <form onSubmit={handleSearch} className="form-row mb-4">
                 <div className="col-md-3">
@@ -267,6 +273,8 @@ const Shop = () => {
             )}
 
             <ShoppingCart isOpen={cartOpen} onClose={() => setCartOpen(false)} />
+                </div>
+            </section>
         </div>
     );
 };

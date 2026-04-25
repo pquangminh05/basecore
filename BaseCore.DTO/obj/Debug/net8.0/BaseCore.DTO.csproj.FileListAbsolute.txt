@@ -70,3 +70,4 @@ C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.DTO\obj\
 C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.DTO\obj\Debug\net8.0\refint\BaseCore.DTO.dll
 C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.DTO\obj\Debug\net8.0\BaseCore.DTO.pdb
 C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.DTO\obj\Debug\net8.0\ref\BaseCore.DTO.dll
+C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.DTO\obj\Debug\net8.0\BaseCore.DTO.sourcelink.json

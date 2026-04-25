@@ -136,3 +136,4 @@ C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.Reposito
 C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.Repository\obj\Debug\net8.0\BaseCore.Repository.pdb
 C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.Repository\obj\Debug\net8.0\BaseCore.Repository.genruntimeconfig.cache
 C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.Repository\obj\Debug\net8.0\ref\BaseCore.Repository.dll
+C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.Repository\obj\Debug\net8.0\BaseCore.Repository.sourcelink.json

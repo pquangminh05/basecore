@@ -18,7 +18,8 @@ const MyOrders = () => {
         setLoading(true);
         try {
             const response = await orderApi.getMyOrders();
-            setOrders(response.data || []);
+            const sorted = (response.data || []).sort((a, b) => b.id - a.id);
+            setOrders(sorted);
             setError('');
         } catch (err) {
             setError('Lỗi khi tải danh sách đơn hàng');
@@ -79,96 +80,100 @@ const MyOrders = () => {
     };
 
     if (loading) {
-        return <div className="loading">Đang tải...</div>;
+        return (
+            <div className="content-wrapper">
+                <section className="content">
+                    <div className="container-fluid text-center py-5">
+                        <div className="spinner-border text-primary"></div>
+                    </div>
+                </section>
+            </div>
+        );
     }
 
     return (
-        <div className="my-orders-container">
-            <div className="orders-header">
-                <h1>📋 Đơn Hàng Của Tôi</h1>
-                <button onClick={loadOrders} className="refresh-btn">🔄 Làm mới</button>
+        <div className="content-wrapper">
+            <div className="content-header">
+                <div className="container-fluid">
+                    <div className="d-flex justify-content-between align-items-center">
+                        <h1 className="m-0">📋 Đơn Hàng Của Tôi</h1>
+                        <button onClick={loadOrders} className="refresh-btn">🔄 Làm mới</button>
+                    </div>
+                </div>
             </div>
 
-            {error && <div className="error-message">{error}</div>}
+            <section className="content">
+                <div className="container-fluid">
+                    {error && <div className="alert alert-danger">{error}</div>}
 
-            {orders.length === 0 ? (
-                <div className="empty-state">
-                    <p>Bạn chưa có đơn hàng nào</p>
-                    <a href="/shop" className="btn btn-primary">→ Tiếp tục mua sắm</a>
-                </div>
-            ) : (
-                <div className="orders-list">
-                    {orders.map((order) => (
-                        <div key={order.id} className="order-card">
-                            <div className="order-header">
-                                <div className="order-info">
-                                    <h3>Đơn hàng #{order.id}</h3>
-                                    <p className="order-date">
-                                        📅 {new Date(order.orderDate).toLocaleDateString('vi-VN')}
-                                    </p>
-                                </div>
-                                <div className="order-status">
-                                    <span 
-                                        className="status-badge"
-                                        style={{ backgroundColor: getStatusColor(order.status) }}
-                                    >
-                                        {getStatusText(order.status)}
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div className="order-content">
-                                <div className="order-details-grid">
-                                    <div className="detail-item">
-                                        <span className="label">Địa chỉ giao hàng:</span>
-                                        <span className="value">{order.shippingAddress}</span>
-                                    </div>
-                                    <div className="detail-item">
-                                        <span className="label">Tổng tiền:</span>
-                                        <span className="value amount">
-                                            {order.totalAmount.toLocaleString('vi-VN')} ₫
-                                        </span>
-                                    </div>
-                                </div>
-
-                                {order.details && order.details.length > 0 && (
-                                    <div className="order-items-preview">
-                                        <strong>Sản phẩm:</strong>
-                                        {order.details.slice(0, 2).map((item, idx) => (
-                                            <div key={idx} className="item-preview">
-                                                • {item.quantity}x {item.productId}
-                                            </div>
-                                        ))}
-                                        {order.details.length > 2 && (
-                                            <div className="item-preview">
-                                                • +{order.details.length - 2} sản phẩm khác
-                                            </div>
-                                        )}
-                                    </div>
-                                )}
-                            </div>
-
-                            <div className="order-actions">
-                                <button 
-                                    onClick={() => handleViewDetails(order)}
-                                    className="btn btn-info"
-                                >
-                                    👁 Chi tiết
-                                </button>
-                                {(order.status === 'Pending' || order.status === 'Processing') && (
-                                    <button 
-                                        onClick={() => handleCancelOrder(order.id)}
-                                        disabled={cancelingId === order.id}
-                                        className="btn btn-danger"
-                                    >
-                                        {cancelingId === order.id ? '⏳ Đang hủy...' : '✕ Hủy đơn'}
-                                    </button>
-                                )}
+                    {orders.length === 0 ? (
+                        <div className="card">
+                            <div className="card-body text-center py-5 text-muted">
+                                <i className="fas fa-shopping-bag fa-3x mb-3 d-block"></i>
+                                <p>Bạn chưa có đơn hàng nào</p>
+                                <a href="/shop" className="btn btn-primary">→ Tiếp tục mua sắm</a>
                             </div>
                         </div>
-                    ))}
+                    ) : (
+                        <div className="orders-list">
+                            {orders.map((order) => (
+                                <div key={order.id} className="order-card">
+                                    <div className="order-header">
+                                        <div className="order-info">
+                                            <h3>Đơn hàng #{order.id}</h3>
+                                            <p className="order-date">
+                                                📅 {new Date(order.orderDate).toLocaleDateString('vi-VN')}
+                                            </p>
+                                        </div>
+                                        <div className="order-status">
+                                            <span
+                                                className="status-badge"
+                                                style={{ backgroundColor: getStatusColor(order.status) }}
+                                            >
+                                                {getStatusText(order.status)}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div className="order-content">
+                                        <div className="order-details-grid">
+                                            <div className="detail-item">
+                                                <span className="label">Địa chỉ giao hàng:</span>
+                                                <span className="value">{order.shippingAddress}</span>
+                                            </div>
+                                            <div className="detail-item">
+                                                <span className="label">Tổng tiền:</span>
+                                                <span className="value amount">
+                                                    {order.totalAmount.toLocaleString('vi-VN')} ₫
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="order-actions">
+                                        <button
+                                            onClick={() => handleViewDetails(order)}
+                                            className="btn btn-info"
+                                        >
+                                            👁 Chi tiết
+                                        </button>
+                                        {(order.status === 'Pending' || order.status === 'Processing') && (
+                                            <button
+                                                onClick={() => handleCancelOrder(order.id)}
+                                                disabled={cancelingId === order.id}
+                                                className="btn btn-danger"
+                                            >
+                                                {cancelingId === order.id ? '⏳ Đang hủy...' : '✕ Hủy đơn'}
+                                            </button>
+                                        )}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+
                 </div>
-            )}
+            </section>
 
             {/* Order Details Modal */}
             {selectedOrder && (

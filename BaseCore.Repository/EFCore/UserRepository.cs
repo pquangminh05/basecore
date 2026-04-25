@@ -39,7 +39,7 @@ namespace BaseCore.Repository.EFCore
             var totalCount = await query.CountAsync();
 
             var users = await query
-                .OrderByDescending(u => u.Created)
+                .OrderBy(u => u.Created)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();

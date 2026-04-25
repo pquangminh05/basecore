@@ -263,3 +263,4 @@ C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.ApiGatew
 C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.ApiGateway\obj\Debug\net8.0\BaseCore.ApiGateway.pdb
 C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.ApiGateway\obj\Debug\net8.0\BaseCore.ApiGateway.genruntimeconfig.cache
 C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.ApiGateway\obj\Debug\net8.0\ref\BaseCore.ApiGateway.dll
+C:\Users\ADMIN\Documents\Codex\2026-04-23-xin-ch-o\FW\BaseCore\BaseCore.ApiGateway\obj\Debug\net8.0\BaseCore.ApiGateway.sourcelink.json

@@ -124,7 +124,7 @@ namespace BaseCore.APIService.Controllers
                 }
             }
 
-            return CreatedAtAction(nameof(GetById), new { id = order.Id }, new { order, details = orderDetails });
+            return Ok(new { message = "Order created successfully", order, details = orderDetails });
         }
 
         /// <summary>
