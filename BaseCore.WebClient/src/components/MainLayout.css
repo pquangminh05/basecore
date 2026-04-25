@@ -1,0 +1,282 @@
+/* ============================================================================
+   MAIN LAYOUT - MODERN DESIGN
+   ============================================================================ */
+
+.layout-container {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+}
+
+/* ============================================================================
+   NAVBAR
+   ============================================================================ */
+
+.main-navbar {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: white;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.navbar-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.sidebar-toggle {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: white;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+    flex-shrink: 0;
+}
+
+.sidebar-toggle:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.brand-logo {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.brand-logo:hover { opacity: 0.9; }
+
+.navbar-end {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.user-name {
+    font-weight: 500;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    color: white;
+}
+
+.btn-logout {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.btn-logout:hover { background: rgba(255, 255, 255, 0.3); }
+
+/* ============================================================================
+   SIDEBAR
+   ============================================================================ */
+
+.main-sidebar {
+    background: linear-gradient(180deg, #1f2937 0%, #111827 100%);
+    width: 260px;
+    position: fixed;
+    left: 0;
+    top: 60px;
+    bottom: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: transform 0.3s ease;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    z-index: 500;
+}
+
+.main-sidebar.collapsed {
+    transform: translateX(-260px);
+}
+
+.sidebar-header {
+    padding: 1.25rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.user-avatar {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: white;
+    flex-shrink: 0;
+}
+
+.user-role {
+    color: white;
+    font-weight: 600;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.user-badge {
+    display: inline-block;
+    background: rgba(99,102,241,0.25);
+    color: #a5b4fc;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    margin-top: 0.2rem;
+}
+
+/* ============================================================================
+   SIDEBAR MENU
+   ============================================================================ */
+
+.sidebar-menu { padding: 0.75rem 0; }
+.sidebar-menu ul { list-style: none; margin: 0; padding: 0; }
+.menu-item { margin: 0.2rem 0.6rem; }
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.65rem 0.85rem;
+    color: #d1d5db;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.menu-link:hover {
+    background: rgba(99,102,241,0.12);
+    color: white;
+}
+
+.menu-link.active {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: white;
+}
+
+.menu-link .icon {
+    font-size: 1.1rem;
+    width: 22px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.menu-divider {
+    color: #6b7280;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.9rem 1.5rem 0.4rem;
+}
+
+/* ============================================================================
+   MAIN CONTENT
+   ============================================================================ */
+
+.main-content {
+    margin-top: 60px;
+    margin-left: 260px;
+    min-height: calc(100vh - 60px);
+    padding: 1.75rem 2rem;
+    box-sizing: border-box;
+    transition: margin-left 0.3s ease;
+}
+
+.main-content.sidebar-collapsed {
+    margin-left: 0;
+}
+
+.content-wrapper { width: 100%; }
+
+.content-header { margin-bottom: 1.5rem; }
+
+.content-header h1 {
+    font-size: 1.75rem;
+    color: #1f2937;
+    margin: 0;
+    font-weight: 700;
+}
+
+.content { width: 100%; }
+.container-fluid { width: 100%; max-width: 100%; }
+
+/* ============================================================================
+   SCROLLBAR
+   ============================================================================ */
+
+.main-sidebar::-webkit-scrollbar { width: 4px; }
+.main-sidebar::-webkit-scrollbar-track { background: transparent; }
+.main-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(99,102,241,0.4);
+    border-radius: 2px;
+}
+
+/* ============================================================================
+   RESPONSIVE - Mobile
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .main-sidebar {
+        z-index: 999;
+        transform: translateX(-260px);
+    }
+    .main-sidebar:not(.collapsed) {
+        transform: translateX(0);
+        box-shadow: 4px 0 20px rgba(0,0,0,0.3);
+    }
+    .main-sidebar.collapsed {
+        transform: translateX(-260px);
+    }
+    .main-content {
+        margin-left: 0;
+        padding: 1rem;
+    }
+    .main-content.sidebar-collapsed {
+        margin-left: 0;
+    }
+    .user-name { display: none; }
+}

@@ -149,7 +149,7 @@ const Categories = () => {
                                 </div>
                             ) : (
                                 <>
-                                    <table className="table table-bordered table-striped">
+                                    <div className="table-responsive"><table className="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th style={{ width: '80px' }}>ID</th>
@@ -191,7 +191,7 @@ const Categories = () => {
                                                 ))
                                             )}
                                         </tbody>
-                                    </table>
+                                    </table></div>
 
                                     <div className="d-flex justify-content-between align-items-center">
                                         <span>Tổng: {totalCount} danh mục</span>

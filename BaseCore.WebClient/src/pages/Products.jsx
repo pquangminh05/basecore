@@ -347,7 +347,7 @@ const Products = () => {
                                 </div>
                             ) : (
                                 <>
-                                    <table className="table table-bordered table-striped">
+                                    <div className="table-responsive"><table className="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
@@ -397,7 +397,7 @@ const Products = () => {
                                                 ))
                                             )}
                                         </tbody>
-                                    </table>
+                                    </table></div>
 
                                     <div className="d-flex justify-content-between align-items-center">
                                         <span>Tổng: {totalCount} sản phẩm</span>

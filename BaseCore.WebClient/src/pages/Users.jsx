@@ -192,7 +192,7 @@ const Users = () => {
                                 </div>
                             ) : (
                                 <>
-                                    <table className="table table-bordered table-striped">
+                                    <div className="table-responsive"><table className="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th>Tên đăng nhập</th>
@@ -246,7 +246,7 @@ const Users = () => {
                                                 ))
                                             )}
                                         </tbody>
-                                    </table>
+                                    </table></div>
 
                                     <div className="d-flex justify-content-between align-items-center">
                                         <span>Tổng: {totalCount} người dùng</span>

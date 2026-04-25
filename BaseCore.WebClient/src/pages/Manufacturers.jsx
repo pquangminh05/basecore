@@ -28,7 +28,9 @@ const Manufacturers = () => {
                 page,
                 pageSize,
             });
-            setItems(response.data.items || []);
+            const data = response.data.items || [];
+            data.sort((a, b) => a.id - b.id);
+            setItems(data);
             setTotalPages(response.data.totalPages || 0);
             setTotalCount(response.data.totalCount || 0);
         } catch (err) {
@@ -121,7 +123,7 @@ const Manufacturers = () => {
                                 <div className="text-center py-5"><div className="spinner-border text-primary"></div></div>
                             ) : (
                                 <>
-                                    <table className="table table-bordered table-striped">
+                                    <div className="table-responsive"><table className="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
@@ -149,7 +151,7 @@ const Manufacturers = () => {
                                                 ))
                                             )}
                                         </tbody>
-                                    </table>
+                                    </table></div>
                                     <div className="d-flex justify-content-between align-items-center">
                                         <span>Tổng: {totalCount}</span>
                                         <ul className="pagination mb-0">

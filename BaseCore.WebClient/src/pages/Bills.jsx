@@ -25,7 +25,10 @@ const Bills = () => {
                 page,
                 pageSize,
             });
-            setItems(response.data.items || []);
+            const bills = response.data.items || [];
+            // Sort by ID ascending (oldest first)
+            bills.sort((a, b) => a.id - b.id);
+            setItems(bills);
             setTotalPages(response.data.totalPages || 0);
             setTotalCount(response.data.totalCount || 0);
         } catch (error) {
@@ -92,7 +95,7 @@ const Bills = () => {
                                 <div className="text-center py-5"><div className="spinner-border text-primary"></div></div>
                             ) : (
                                 <>
-                                    <table className="table table-bordered table-striped">
+                                    <div className="table-responsive"><table className="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
@@ -123,7 +126,7 @@ const Bills = () => {
                                                 ))
                                             )}
                                         </tbody>
-                                    </table>
+                                    </table></div>
 
                                     <ul className="pagination mb-0">
                                         <li className={`page-item ${page === 1 ? 'disabled' : ''}`}>

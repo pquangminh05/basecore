@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import './MainLayout.css';
 
 const MainLayout = ({ children }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const { user, logout, isAdmin } = useAuth();
+    const [sidebarOpen, setSidebarOpen] = useState(true);
 
     const handleLogout = () => {
         logout();
@@ -15,153 +17,136 @@ const MainLayout = ({ children }) => {
     const isActive = (path) => location.pathname === path ? 'active' : '';
 
     return (
-        <div className="wrapper">
+        <div className="layout-container">
             {/* Navbar */}
-            <nav className="main-header navbar navbar-expand navbar-white navbar-light">
-                <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <a className="nav-link" data-widget="pushmenu" href="#" role="button">
-                            <i className="fas fa-bars"></i>
-                        </a>
-                    </li>
-                    <li className="nav-item d-none d-sm-inline-block">
-                        <Link to="/" className="nav-link">Trang chủ</Link>
-                    </li>
-                </ul>
+            <nav className="main-navbar">
+                <div className="navbar-content">
+                    <button 
+                        className="sidebar-toggle"
+                        onClick={() => setSidebarOpen(!sidebarOpen)}
+                    >
+                        <i className="fas fa-bars"></i>
+                    </button>
+                    <Link to="/" className="brand-logo">
+                        <span>⌚ Watch Store</span>
+                    </Link>
+                </div>
 
-                <ul className="navbar-nav ml-auto">
-                    <li className="nav-item dropdown">
-                        <a className="nav-link" data-toggle="dropdown" href="#">
-                            <i className="far fa-user"></i> {user?.name || user?.username}
-                        </a>
-                        <div className="dropdown-menu dropdown-menu-right">
-                            <span className="dropdown-item dropdown-header">
-                                {user?.email}
-                            </span>
-                            <div className="dropdown-divider"></div>
-                            <button className="dropdown-item" onClick={handleLogout}>
-                                <i className="fas fa-sign-out-alt mr-2"></i> Đăng xuất
-                            </button>
-                        </div>
-                    </li>
-                </ul>
+                <div className="navbar-end">
+                    <div className="user-menu">
+                        <span className="user-name">👤 {user?.name || user?.username}</span>
+                        <button 
+                            className="btn-logout"
+                            onClick={handleLogout}
+                            title="Đăng xuất"
+                        >
+                            <i className="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
             </nav>
 
             {/* Sidebar */}
-            <aside className="main-sidebar sidebar-dark-primary elevation-4">
-                <Link to="/" className="brand-link">
-                    <span className="brand-text font-weight-light ml-3">
-                        <b>Watch</b> Sales
-                    </span>
-                </Link>
-
-                <div className="sidebar">
-                    <div className="user-panel mt-3 pb-3 mb-3 d-flex">
-                        <div className="image">
-                            <i className="fas fa-user-circle fa-2x text-light"></i>
+            <aside className={`main-sidebar ${sidebarOpen ? '' : 'collapsed'}`}>
+                <div className="sidebar-header">
+                    <div className="user-info">
+                        <div className="user-avatar">
+                            <i className="fas fa-user-circle"></i>
                         </div>
-                        <div className="info">
-                            <Link to="#" className="d-block">{user?.name || user?.username}</Link>
+                        <div>
+                            <p className="user-role">{user?.name || user?.username}</p>
+                            <span className="user-badge">{isAdmin() ? '🛡️ Admin' : '👤 User'}</span>
                         </div>
                     </div>
-
-                    <nav className="mt-2">
-                        <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
-
-                            {/* Bảng điều khiển - tất cả */}
-                            <li className="nav-item">
-                                <Link to="/" className={`nav-link ${isActive('/')}`}>
-                                    <i className="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>Bảng điều khiển</p>
-                                </Link>
-                            </li>
-
-                            {/* Cửa hàng & Đơn hàng - chỉ user thường */}
-                            {!isAdmin() && (
-                                <>
-                                    <li className="nav-item">
-                                        <Link to="/shop" className={`nav-link ${isActive('/shop')}`}>
-                                            <i className="nav-icon fas fa-shopping-cart"></i>
-                                            <p>🛍️ Cửa hàng</p>
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/my-orders" className={`nav-link ${isActive('/my-orders')}`}>
-                                            <i className="nav-icon fas fa-list"></i>
-                                            <p>📋 Đơn hàng của tôi</p>
-                                        </Link>
-                                    </li>
-                                </>
-                            )}
-
-                            {/* Menu Admin */}
-                            {isAdmin() && (
-                                <>
-                                    <li className="nav-item">
-                                        <Link to="/products" className={`nav-link ${isActive('/products')}`}>
-                                            <i className="nav-icon fas fa-box"></i>
-                                            <p>Sản phẩm</p>
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/categories" className={`nav-link ${isActive('/categories')}`}>
-                                            <i className="nav-icon fas fa-tags"></i>
-                                            <p>Danh mục</p>
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/manufacturers" className={`nav-link ${isActive('/manufacturers')}`}>
-                                            <i className="nav-icon fas fa-industry"></i>
-                                            <p>Thương hiệu</p>
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/bills" className={`nav-link ${isActive('/bills')}`}>
-                                            <i className="nav-icon fas fa-file-invoice"></i>
-                                            <p>Hóa đơn / Đơn hàng</p>
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/users" className={`nav-link ${isActive('/users')}`}>
-                                            <i className="nav-icon fas fa-users"></i>
-                                            <p>Người dùng</p>
-                                        </Link>
-                                    </li>
-                                </>
-                            )}
-
-                            {/* Menu user thường - sản phẩm & danh mục */}
-                            {!isAdmin() && (
-                                <>
-                                    <li className="nav-item">
-                                        <Link to="/products" className={`nav-link ${isActive('/products')}`}>
-                                            <i className="nav-icon fas fa-box"></i>
-                                            <p>Sản phẩm</p>
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/categories" className={`nav-link ${isActive('/categories')}`}>
-                                            <i className="nav-icon fas fa-tags"></i>
-                                            <p>Danh mục</p>
-                                        </Link>
-                                    </li>
-                                </>
-                            )}
-                        </ul>
-                    </nav>
                 </div>
+
+                <nav className="sidebar-menu">
+                    <ul>
+                        {/* Dashboard */}
+                        <li className="menu-item">
+                            <Link to="/" className={`menu-link ${isActive('/')}`}>
+                                <span className="icon">📊</span>
+                                <span>Bảng điều khiển</span>
+                            </Link>
+                        </li>
+
+                        {/* User Menu */}
+                        {!isAdmin() && (
+                            <>
+                                <li className="menu-divider">MUASẮM</li>
+                                <li className="menu-item">
+                                    <Link to="/shop" className={`menu-link ${isActive('/shop')}`}>
+                                        <span className="icon">🛍️</span>
+                                        <span>Cửa hàng</span>
+                                    </Link>
+                                </li>
+                                <li className="menu-item">
+                                    <Link to="/my-orders" className={`menu-link ${isActive('/my-orders')}`}>
+                                        <span className="icon">📦</span>
+                                        <span>Đơn hàng của tôi</span>
+                                    </Link>
+                                </li>
+                                <li className="menu-item">
+                                    <Link to="/products" className={`menu-link ${isActive('/products')}`}>
+                                        <span className="icon">🎁</span>
+                                        <span>Sản phẩm</span>
+                                    </Link>
+                                </li>
+                                <li className="menu-item">
+                                    <Link to="/categories" className={`menu-link ${isActive('/categories')}`}>
+                                        <span className="icon">🏷️</span>
+                                        <span>Danh mục</span>
+                                    </Link>
+                                </li>
+                            </>
+                        )}
+
+                        {/* Admin Menu */}
+                        {isAdmin() && (
+                            <>
+                                <li className="menu-divider">QUẢN LÝ</li>
+                                <li className="menu-item">
+                                    <Link to="/products" className={`menu-link ${isActive('/products')}`}>
+                                        <span className="icon">📦</span>
+                                        <span>Sản phẩm</span>
+                                    </Link>
+                                </li>
+                                <li className="menu-item">
+                                    <Link to="/categories" className={`menu-link ${isActive('/categories')}`}>
+                                        <span className="icon">🏷️</span>
+                                        <span>Danh mục</span>
+                                    </Link>
+                                </li>
+                                <li className="menu-item">
+                                    <Link to="/manufacturers" className={`menu-link ${isActive('/manufacturers')}`}>
+                                        <span className="icon">🏭</span>
+                                        <span>Thương hiệu</span>
+                                    </Link>
+                                </li>
+                                <li className="menu-divider">KINH DOANH</li>
+                                <li className="menu-item">
+                                    <Link to="/bills" className={`menu-link ${isActive('/bills')}`}>
+                                        <span className="icon">📋</span>
+                                        <span>Đơn hàng</span>
+                                    </Link>
+                                </li>
+                                <li className="menu-divider">HỆ THỐNG</li>
+                                <li className="menu-item">
+                                    <Link to="/users" className={`menu-link ${isActive('/users')}`}>
+                                        <span className="icon">👥</span>
+                                        <span>Người dùng</span>
+                                    </Link>
+                                </li>
+                            </>
+                        )}
+                    </ul>
+                </nav>
             </aside>
 
-            {/* Content */}
-            {children}
-
-            {/* Footer */}
-            <footer className="main-footer">
-                <strong>Copyright &copy; 2024 <a href="#">BaseCore Sales</a>.</strong>
-                <div className="float-right d-none d-sm-inline-block">
-                    <b>Phiên bản</b> 1.0.0
-                </div>
-            </footer>
+            {/* Main Content */}
+            <main className={`main-content ${sidebarOpen ? '' : 'sidebar-collapsed'}`}>
+                {children}
+            </main>
         </div>
     );
 };

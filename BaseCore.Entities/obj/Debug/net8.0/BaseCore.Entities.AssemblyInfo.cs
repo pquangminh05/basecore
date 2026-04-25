@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BaseCore.Entities")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e57d4294d2669dbec0882507fe07c22ccf0e530e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5fd7b805f505620263ac1040bf96b9fda9f9f99e")]
 [assembly: System.Reflection.AssemblyProductAttribute("BaseCore.Entities")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BaseCore.Entities")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
